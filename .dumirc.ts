@@ -13,7 +13,7 @@ export default defineConfig({
       {title: 'Github', link: 'https://github.com/xiyionxiong'}
     ],
 
-    base: "/xiyionxiong/",
-    publicPath: "/xiyionxiong/",
+    base: "/app/",
+    publicPath: "/app/",
   },
 });
