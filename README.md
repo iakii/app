@@ -1,6 +1,6 @@
- # 熊凯
+ # 关于我
 
-男 | 15323410416 | xiongkai@petalmail.com
+男 | xiongkai@petalmail.com
 
 6年前端开发经验 | 求职意向 ：前端开发工程师 | 期望薪资 ：13-18K | 期望城市 ：长沙
 
