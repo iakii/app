@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iClip - Clipboard History Manager</title>
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      position: relative;
+    }
+
+    header {
+      background: linear-gradient(120deg, #FFBF19, #F73737);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      position: sticky;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header .github-link {
+      font-size: 1rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 5rem auto 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .features ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .features li {
+      background: #f9f9f9;
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .features li:hover {
+      background-color: #e9e9e9;
+    }
+
+    .download-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .download-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+    }
+
+    .download-buttons a div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .download-buttons a {
+      text-decoration: none;
+      background-color: #FFBF19;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      font-weight: bold;
+
+    }
+
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      height: auto;
+    }
+
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .carousel-button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+    }
+
+    .carousel-button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .language-toggle {
+      background-color: transparent;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 32px;
+    }
+
+    .language-toggle:hover {
+      background-color: #ffb702;
+    }
+
+    .lang-zh {
+      display: block;
+    }
+
+    .lang-en {
+      display: none;
+    }
+
+    .lang-zh.active {
+      display: none;
+    }
+
+    .lang-en.active {
+      display: block;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="nav">
+      <a href="https://github.com/iakii/app/releases" class="github-link" target="_blank" title="GitHub">
+
+        <img src="./github.svg" />
+
+      </a>
+      <a href="https://ipaper.apanda.online" class="github-link" target="_blank" title="iPaper">
+
+        <img src="./ipaper.svg" style="width: 22px;height: 22px;margin-left: 32px;" />
+
+      </a>
+      <button class="language-toggle" style="display: none;" onclick="toggleLanguage()">切换语言 / Toggle Language</button>
+    </div>
+
+    <img src="./white.svg" alt="iClip Logo" style="width: 128px;height: 128px;" />
+    <h1 class="lang-en">Welcome to iClip</h1>
+    <h1 class="lang-zh">欢迎使用 iClip</h1>
+    <p class="lang-en">Your Clipboard History, Simplified</p>
+    <p class="lang-zh">您的剪贴板历史，简化版</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Carousel Section -->
+    <section class="section">
+      <h2 class="lang-en">Feature Showcase</h2>
+      <h2 class="lang-zh">功能展示</h2>
+      <div class="carousel">
+        <div class="carousel-images">
+          <img src="./home.png" alt="Feature 1">
+          <img src="./search.png" alt="Feature 1">
+          <img src="./slider.png" alt="Feature 1">
+          <img src="./tray.png" alt="Feature 1">
+          <img src="./setting.png" alt="Feature 1">
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-button" onclick="prevSlide()">❮</button>
+          <button class="carousel-button" onclick="nextSlide()">❯</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="lang-en">Key Features</h2>
+      <h2 class="lang-zh">主要功能</h2>
+      <div class="features">
+        <ul>
+          <li class="lang-en"><strong>Clipboard History</strong>: Keep track of everything you've copied. Never lose important information again.</li>
+          <li class="lang-zh"><strong>剪贴板历史</strong>：跟踪您复制的所有内容，再也不担心丢失重要信息。</li>
+          <li class="lang-en"><strong>Quick Paste</strong>: Select from your clipboard history and paste with just a click.</li>
+          <li class="lang-zh"><strong>快速粘贴</strong>：从剪贴板历史中选择并点击一下粘贴。</li>
+          <li class="lang-en"><strong>Elegant UI</strong>: A clean and modern interface that is easy to use.</li>
+          <li class="lang-zh"><strong>精美UI设计</strong>：简洁现代的界面，操作简单。</li>
+          <li class="lang-en"><strong>Cross-Platform Support</strong>: Works seamlessly on Windows, macOS, and Linux.</li>
+          <li class="lang-zh"><strong>跨平台支持</strong>：在 Windows、macOS 和 Linux 上无缝运行。</li>
+          <li class="lang-en"><strong>Alt + C</strong>: Open/Close main interface with this shortcut.</li>
+          <li class="lang-zh"><strong>Alt + C</strong>：使用此快捷键唤起/关闭主界面。</li>
+          <li class="lang-en"><strong>Escape</strong>: Clears input content. If there's no content, it hides the main interface.</li>
+          <li class="lang-zh"><strong>Escape</strong>：清除输入内容。如果没有内容，隐藏主界面。</li>
+          <li class="lang-en"><strong>Auto Pagination</strong>: Use Tab/Arrow Down to select the next item, Shift+Tab/Arrow Up to select the previous item, and Enter to paste at the selected position.</li>
+          <li class="lang-zh"><strong>自动分页</strong>：使用 Tab/Arrow Down 选择下一项，Shift+Tab/Arrow Up 选择上一项，Enter 在选定位置粘贴。</li>
+
+
+          <li class="lang-en"><strong>Toggle Sidebar</strong>: Switch sidebar effect on or off.</li>
+          <li class="lang-zh"><strong>切换侧边栏</strong>：切换侧边栏效果。</li>
+
+          <li class="lang-en"><strong>Customizable File Information</strong>: Choose whether or not to display the copied file information.</li>
+          <li class="lang-zh"><strong>文件信息</strong>：选择是否展示复制的文件信息。</li>
+          <li class="lang-zh"><strong>颜色</strong>：如果是颜色值，将会展示颜色效果。</li>
+          <li class="lang-en"><strong>History Retention</strong>: Set history file retention to a maximum of 7 days.</li>
+          <li class="lang-zh"><strong>历史记录保留</strong>：可以设置历史文件最多保留7天。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="lang-en">Why Choose iClip?</h2>
+      <h2 class="lang-zh">为什么选择 iClip？</h2>
+      <p class="lang-en">With iClip, you can:</p>
+      <p class="lang-zh">使用 iClip，您可以：</p>
+      <ul>
+        <li class="lang-en"><strong>Never lose your copied text</strong> – Clipboard history is always available.</li>
+        <li class="lang-zh"><strong>再也不丢失您复制的文本</strong> – 剪贴板历史始终可用。</li>
+        <li class="lang-en"><strong>Improve your productivity</strong> – Quickly access and paste previous items without having to copy them again.</li>
+        <li class="lang-zh"><strong>提高工作效率</strong> – 快速访问并粘贴之前的内容，无需重新复制。</li>
+        <li class="lang-en"><strong>Enjoy a beautiful design</strong> – A user-friendly and attractive interface that works as well as it looks.</li>
+        <li class="lang-zh"><strong>享受精美设计</strong> – 用户友好且美观的界面，功能与外观兼备。</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2 class="lang-en">Download iClip</h2>
+      <h2 class="lang-zh">下载 iClip</h2>
+      <p class="lang-en">Start organizing your clipboard history today! Available for Windows, macOS, and Linux.</p>
+      <p class="lang-zh">今天就开始整理您的剪贴板历史吧！支持 Windows、macOS 和 Linux。</p>
+      <div class="download-buttons">
+        <a href="#" class="lang-en">
+          <div>
+            <img src="./windows.svg" style="width: 24px;height: 24px;margin-right: 8px;" />Download for Windows
+          </div>
+        </a>
+
+        <a href="#" class="lang-zh">
+          <div>
+            <img src="./windows.svg" style="width: 24px;height: 24px;margin-right: 8px;" />
+            下载 Windows 版
+          </div>
+
+        </a>
+
+        <a href="#" class="lang-en">
+          <div> <img src="./apple.svg" style="width: 24px;height: 24px;margin-right: 8px;" />Download for macOS</div>
+        </a>
+
+        <a href="#" class="lang-zh">
+          <div><img src="./apple.svg" style="width: 24px;height: 24px;margin-right: 8px;" />
+            下载 macOS 版</div>
+        </a>
+
+
+        <a href="#" class="lang-en">
+          <div><img src="./linux.svg" style="width: 24px;height: 24px;margin-right: 8px;" />Download for Linux</div>
+        </a>
+
+        <a href="#" class="lang-zh">
+          <div><img src="./linux.svg" style="width: 24px;height: 24px;margin-right: 8px;" />
+            下载 Linux 版</div>
+        </a>
+      </div>
+    </section>
+
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <p>&copy; 2024 iPaper. All Rights Reserved.</p>
+      <p>联系我们 / Contact us: <a href="mailto:xiongkai@petalmail.com">xiongkai@petalmail.com</a> </p>
+      <div class="footer-links">
+        <a href="./privacy.html" target="_blank">隐私协议 / Privacy Agreement</a> |
+        <a href="./terms.html" target="_blank">服务条款 / Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleLanguage () {
+      document.querySelectorAll( '.lang-en' ).forEach( ( el ) => el.classList.toggle( 'active' ) );
+      document.querySelectorAll( '.lang-zh' ).forEach( ( el ) => el.classList.toggle( 'active' ) );
+    }
+
+    // Carousel functionality
+    let currentIndex = 0;
+
+    function showSlide ( index ) {
+      const slides = document.querySelectorAll( '.carousel-images img' );
+      if ( index >= slides.length ) currentIndex = 0;
+      if ( index < 0 ) currentIndex = slides.length - 1;
+      document.querySelector( '.carousel-images' ).style.transform = `translateX(-${ currentIndex * 100 }%)`;
+    }
+
+    function nextSlide () {
+      currentIndex++;
+      showSlide( currentIndex );
+    }
+
+    function prevSlide () {
+      currentIndex--;
+      showSlide( currentIndex );
+    }
+
+    showSlide( currentIndex );
+  </script>
+</body>
+
+</html>
